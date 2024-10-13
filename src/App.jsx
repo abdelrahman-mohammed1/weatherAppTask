@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { FaWind } from 'react-icons/fa6';
 import { WiHumidity } from 'react-icons/wi';
 import { TbTemperatureCelsius } from 'react-icons/tb';
-import Button from './ui/Button';
-import Container from './ui/Container';
-import Input from './ui/Input';
-import Title from './ui/Title';
+import { Title, Input, Row, Container, Button } from './ui';
 import WeatherDetail from './components/WeatherDetail';
 import Spinner from './components/Spinner';
+import { ToastContainer } from 'react-toastify';
+import { useWeatherAndImage } from './hooks/useWeatherAndImage';
+import 'react-toastify/dist/ReactToastify.min.css';
 const TextDecription = styled.p`
   font-size: 1.8rem;
   font-weight: 700;
@@ -18,8 +18,11 @@ const TextDecription = styled.p`
   font-style: italic;
 `;
 
-const StyledApp = styled.div`
-  background-image: ${(props) => `url(${props.backgroundImage})`};
+const StyledApp = styled.div.attrs((props) => ({
+  style: {
+    backgroundImage: `url(${props.backgroundImage})`,
+  },
+}))`
   height: 100dvh;
   background-repeat: no-repeat;
   background-position: center;
@@ -28,66 +31,17 @@ const StyledApp = styled.div`
   padding: 20px;
 `;
 
-const Row = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: ${(props) => (props.gap === 'small' ? '2px' : '16px')};
-`;
-
 export default function App() {
-  const [city, setCity] = useState('London');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [weatherData, setWeatherData] = useState(null);
-  const [cityImage, setCityImage] = useState('');
   const date = new Date().toLocaleDateString('en-US', {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
+  const [searchQuery, setSearchQuery] = useState('');
+  const [city, setCity] = useState('London');
 
-  //
-  useEffect(() => {
-    async function getWeatherData() {
-      if (city && city.length > 0) {
-        try {
-          const res = await fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${
-              import.meta.env.VITE_API_KEY
-            }&units=metric`
-          );
-          const data = await res.json();
-          console.log(data);
-          setWeatherData(data);
-        } catch (err) {
-          console.log(err);
-        }
-      }
-    }
-
-    async function getCityImage() {
-      if (city && city.length > 0) {
-        try {
-          const res = await fetch(
-            `https://api.unsplash.com/search/photos?query=${city}&client_id=${
-              import.meta.env.VITE_UNSPLASH_ACCESS_KEY
-            }`
-          );
-          const data = await res.json();
-          if (data.results.length > 0) {
-            console.log(data);
-            setCityImage(data.results[0].urls.full);
-          }
-        } catch (err) {
-          console.log(err);
-        }
-      }
-    }
-
-    getWeatherData();
-    getCityImage();
-  }, [city]);
+  const { weatherData, loading, backgroundImage } = useWeatherAndImage(city);
 
   function handleClick() {
     setCity(searchQuery);
@@ -102,51 +56,57 @@ export default function App() {
   }
 
   if (!weatherData) return <Spinner />;
-  return (
-    <StyledApp backgroundImage={cityImage}>
-      <Row gap="small">
-        <Input
-          type="text"
-          placeholder="Enter City Name"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          onKeyDown={handleKeyPress}
-        />
-        <Button
-          onClick={() => {
-            handleClick();
-          }}
-        >
-          Submit
-        </Button>
-      </Row>
-
-      <Row>
-        <Container>
-          <Title>{weatherData.name}</Title>
-          <Title>{date}</Title>
-          <TextDecription>
-            Temperature Description: {weatherData.weather[0].description}
-          </TextDecription>
-          <Row gap="large">
-            <WeatherDetail
-              kindDetail="Temperature"
-              result={weatherData.main.temp}
-              Icon={<TbTemperatureCelsius />}
-            />
-            <WeatherDetail
-              kindDetail="Humidity"
-              result={weatherData.main.humidity}
-              Icon={<WiHumidity />}
-            />
-            <WeatherDetail
-              kindDetail="Wind Speed"
-              result={weatherData.wind.speed}
-              Icon={<FaWind />}
-            />
-          </Row>
-        </Container>
-      </Row>
-    </StyledApp>
+  return loading ? (
+    <Spinner />
+  ) : (
+    <>
+      <StyledApp backgroundImage={backgroundImage}>
+        <Row gap="small">
+          <Input
+            type="text"
+            required
+            placeholder="Enter City Name"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={handleKeyPress}
+          />
+          <Button
+            type="button"
+            onClick={() => {
+              handleClick();
+            }}
+          >
+            Submit
+          </Button>
+        </Row>
+        <Row>
+          <Container>
+            <Title>{weatherData.name}</Title>
+            <Title>{date}</Title>
+            <TextDecription>
+              Temperature Description: {weatherData.weather[0].description}
+            </TextDecription>
+            <Row gap="large">
+              <WeatherDetail
+                kindDetail="Temperature"
+                result={weatherData.main.temp}
+                Icon={<TbTemperatureCelsius />}
+              />
+              <WeatherDetail
+                kindDetail="Humidity"
+                result={weatherData.main.humidity}
+                Icon={<WiHumidity />}
+              />
+              <WeatherDetail
+                kindDetail="Wind Speed"
+                result={weatherData.wind.speed}
+                Icon={<FaWind />}
+              />
+            </Row>
+          </Container>
+        </Row>
+      </StyledApp>
+      <ToastContainer position="top-right" style={{ zIndex: 9999 }} />
+    </>
   );
 }
