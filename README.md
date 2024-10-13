@@ -1,6 +1,9 @@
 # Weather App with React, Vite, and Styled Components
 
-![Site Screenshot]('https://github.com/abdelrahman-mohammed1/weatherAppTask/blob/main/src/assets/screenshot.jpg')
+<p align='center'>  
+<img src="https://github.com/abdelrahman-mohammed1/weatherAppTask/blob/main/src/assets/screenshot.jpg">
+</p>
+![Site Screenshot]('')
 This project is a weather application built with React and Vite. It fetches weather data from the OpenWeatherMap API and displays it along with a background image fetched from Unsplash based on the city name. The application also uses `react-toastify` for notifications and `styled-components` for styling.
 
 ## Features
