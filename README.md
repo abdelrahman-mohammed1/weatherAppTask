@@ -1,10 +1,28 @@
-# Weather App with React, Vite, and Styled Components
-
 <p align='center'>  
 <img src="https://github.com/abdelrahman-mohammed1/weatherAppTask/blob/main/src/assets/screenshot.jpg">
 </p>
-![Site Screenshot]('')
-This project is a weather application built with React and Vite. It fetches weather data from the OpenWeatherMap API and displays it along with a background image fetched from Unsplash based on the city name. The application also uses `react-toastify` for notifications and `styled-components` for styling.
+<p align="center">
+    <h1 align="center">Weather App with React, Vite, and Styled Components</h1>
+</p>
+<p align="center">
+    <em><code>This project is a weather application built with React and Vite. It fetches weather data from the OpenWeatherMap API and displays it along with a background image fetched from Unsplash based on the city name. The application also uses `react-toastify` for notifications and `styled-components` for styling.</code></em>
+</p>
+
+<p align="center">
+		<em>Built with the tools and technologies:</em>
+</p>
+<p align="center">
+	<img src="https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=flat&logo=JavaScript&logoColor=black" alt="JavaScript">
+	<img src="https://img.shields.io/badge/HTML5-E34F26.svg?style=flat&logo=HTML5&logoColor=white" alt="HTML5">
+	<img src="https://img.shields.io/badge/styledcomponents-DB7093.svg?style=flat&logo=styled-components&logoColor=white" alt="styledcomponents">
+	<img src="https://img.shields.io/badge/Jest-C21325.svg?style=flat&logo=Jest&logoColor=white" alt="Jest">
+	<img src="https://img.shields.io/badge/Vite-646CFF.svg?style=flat&logo=Vite&logoColor=white" alt="Vite">
+	<img src="https://img.shields.io/badge/React-61DAFB.svg?style=flat&logo=React&logoColor=black" alt="React">
+	<img src="https://img.shields.io/badge/ESLint-4B32C3.svg?style=flat&logo=ESLint&logoColor=white" alt="ESLint">
+	<img src="https://img.shields.io/badge/JSON-000000.svg?style=flat&logo=JSON&logoColor=white" alt="JSON">
+</p>
+
+<br>
 
 ## Features
 
