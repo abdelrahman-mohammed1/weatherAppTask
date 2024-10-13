@@ -111,14 +111,14 @@ npm run build
 
 ## Acknowledgments
 
-- [React]('https://react.dev/learn')
-- [Vite]('https://vite.dev/')
-- [Styled Components]('https://styled-components.com/')
-- [React Toastify]('https://fkhadra.github.io/react-toastify/introduction')
-- [OpenWeatherMap API]('https://openweathermap.org/api')
-- [Unsplash API]('https://unsplash.com/developers')
-- [Prop-Types]('https://www.npmjs.com/package/prop-types')
-- [Jest]('https://jestjs.io/')
+- <a href="https://react.dev/learn">React</a>
+- <a href="https://vite.dev/">Vite</a>
+- <a href="https://styled-components.com/">Styled Components</a>
+- <a href="https://fkhadra.github.io/react-toastify/introduction">React Toastify</a>
+- <a href="https://openweathermap.org/api">OpenWeatherMap API</a>
+- <a href="https://unsplash.com/developers">Unsplash API</a>
+- <a href="https://www.npmjs.com/package/prop-types">Prop-Types</a>
+- <a href="https://jestjs.io/">Jest</a>
 
 ---
 
