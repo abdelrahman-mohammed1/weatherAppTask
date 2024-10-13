@@ -36,8 +36,6 @@ export const useWeatherAndImage = (city) => {
           }
         } catch (err) {
           console.log('Error fetching weather data:', err);
-          console.log('TEST');
-          toast.error('hello');
           toast.error(`City "${city}" not found. Showing last valid city.`);
           setWeatherData(previousWeatherDataRef.current);
           setBackgroundImage(
